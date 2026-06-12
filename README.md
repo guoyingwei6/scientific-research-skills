@@ -1,6 +1,6 @@
 ---
 created: 2026-06-12 16:15
-updated: 2026-06-12 17:54
+updated: 2026-06-12 17:59
 ---
 # Scientific Research Skills
 
@@ -28,6 +28,19 @@ scientific-research-skills/
 ```
 
 ## Origin and evolution
+
+### `literature-mentor`
+
+The `literature-mentor` skill was created from scratch rather than copied from an external GitHub repository. Its first version was built from a requirements discussion about how an agent should help read papers through Zotero MCP: retrieve full text when possible, explain the paper like a graduate supervisor, and guide the user through the article figure by figure.
+
+The original design focused on a mentor-style reading workflow for life-sciences and population-genetics papers. It emphasizes an overall paper overview first, then detailed figure-by-figure interpretation based on three information sources: figure legends, corresponding Results or Methods text, and related tables or supplementary data. Because Zotero MCP may not extract PDF images directly, the skill explicitly checks whether text evidence is sufficient and asks for uploaded images when visual interpretation would otherwise be unreliable.
+
+| Reference source | What was adopted or adapted |
+| --- | --- |
+| No external repository in the first version | The initial workflow was generated from the user's own requirements: Zotero-backed literature reading, mentor-like explanation, figure-by-figure pacing, and domain-aware critique for cattle genomics and population genetics. |
+| `littleZ05/PaperLocus` | Inspired later conceptual additions: narrative-type detection for method/tool papers versus scientific-discovery papers, a literature-positioning summary item, and clearer separation between claims, causal inference, and extrapolation. |
+
+Most of the core workflow remained unchanged after reviewing `PaperLocus`. The three-source synthesis framework, figure-by-figure stopping points, and information-sufficiency checks were kept because they were already stronger for deep paper reading than a more generic paper-location workflow. The resulting skill is therefore mainly original, with one later layer of conceptual refinement from `PaperLocus`.
 
 ### `scientific-paper-writing`
 
