@@ -161,7 +161,7 @@ The original structure came from [`ChenLiu-1996/figures4papers`](https://github.
 | Reference source | Adapted ideas |
 | --- | --- |
 | [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers) | Starting implementation, publication-figure references, demos, and plotting patterns. |
-| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) / `nature-figure` | R backend, Figure Contract, `figure-contract.md`, `r-backend.md`, and population-genetics figure types. |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | Ideas from `nature-figure`: R backend, Figure Contract, `figure-contract.md`, `r-backend.md`, and population-genetics figure types. |
 | [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) | Okabe-Ito palette, grayscale checks, journal column-width references, and submission checklist. |
 
 Evaluated but not adopted: large inline plotting snippets from [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization), because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.

@@ -159,7 +159,7 @@
 | 参考来源 | 吸收的思想 |
 | --- | --- |
 | [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers) | 起始实现、出版级作图 reference、demo 和作图模式。 |
-| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) / `nature-figure` | R backend、Figure Contract、`figure-contract.md`、`r-backend.md` 和群体遗传学图型。 |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | 参考其中 `nature-figure` 的思路：R backend、Figure Contract、`figure-contract.md`、`r-backend.md` 和群体遗传学图型。 |
 | [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) | Okabe-Ito 配色、灰度检查、期刊列宽参考和 submission checklist。 |
 
 评估但没有采纳：[`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
