@@ -1,115 +1,282 @@
----
-created: 2026-06-12 18:18
-updated: 2026-06-12 18:18
----
 [English](README.md)
 
 # Scientific Research Skills
 
-一组可复用的科研工作流 agent skills，重点覆盖文献深度阅读、出版级科研作图、生命科学论文写作和专利技术交底书生成。
+这是一组面向科研工作的 agent skills：深度读文献、写生命科学论文、制作出版级科研图，以及撰写中文专利技术交底书。
 
-## 包含的 skills
+这些 skills 不是一次性问答 prompt，而是工作流。每个 skill 都定义了任务步骤、质量检查、工具不可用时的降级方式，以及对应科研场景里的判断标准，让 agent 更像一个研究助理，而不是普通聊天机器人。
 
-| Skill | 用途 |
-| --- | --- |
-| `literature-mentor` | 基于 Zotero 全文的导师式文献深度解读，强调先整体理解，再逐图拆解。 |
-| `scientific-figure-making` | 使用 Python 或 R 制作出版级科研图，覆盖群体遗传学图型和多面板排版。 |
-| `scientific-paper-writing` | 面向生命科学和组学论文的写作支持，覆盖题目、摘要、引言、方法、结果、讨论、rebuttal、cover letter 和润色等任务。 |
-| `patent-disclosure-desktop` | 面向中国专利挖掘和技术交底书撰写的桌面 agent 工作流。 |
+## Skills 一览
 
-## 仓库结构
+| Skill | 最适合做什么 | 主要输出 |
+| --- | --- | --- |
+| `literature-mentor` | 深度理解论文，尤其是逐图读懂文章 | 文章概览、逐图解释、批判性分析、研究启发 |
+| `scientific-paper-writing` | 写作或修改生命科学和组学论文 | 标题、摘要、IMRAD 章节、rebuttal、cover letter、润色、自查 |
+| `scientific-figure-making` | 制作出版级科研图 | 图形设计方案、Python/R 作图代码、可投稿导出的图形规范 |
+| `patent-disclosure-desktop` | 挖掘专利点并撰写中文技术交底书 | 专利点列表、现有技术对比、交底书草稿、修订记录 |
 
-每个一级目录都是一个独立的 skill package。大多数 skill 都包含一个 `SKILL.md` 入口文件，部分 skill 还包含 `references/` 支撑材料。
+## `literature-mentor`
+
+### 简介
+
+导师式文献阅读 skill。它通过 Zotero 或网络来源获取论文，然后像研究生导师一样带用户读文章：先看整篇文章的科学故事，再逐图拆解，最后总结方法学价值、局限和研究启发。
+
+### 可以帮你做什么
+
+- 根据题目、DOI 或 Zotero library 搜索论文。
+- 给出结构化概览：研究问题、背景缺口、核心创新、数据规模和技术路线。
+- 一张图一张图解释，而不是只给一个浅层摘要。
+- 解读图时综合三类信息源：图例、正文对应 Results/Methods 段落、表格或补充材料。
+- 判断文字信息是否足够；如果必须看图片，会请用户上传图，而不是强行猜。
+- 讨论方法、局限、统计选择、过度解释风险，以及和牛基因组学/群体遗传学的关系。
+- 最后输出凝练总结：问题是啥、解法是啥、发现个啥。
+
+### 典型用法
 
 ```text
-scientific-research-skills/
-├── literature-mentor/
-├── scientific-figure-making/
-├── scientific-paper-writing/
-└── patent-disclosure-desktop/
+Use literature-mentor to explain this DOI figure by figure: ...
 ```
 
-## 来源与演化
+```text
+Help me read this paper from Zotero like a supervisor. Focus on methods and reusable ideas.
+```
 
-### `literature-mentor`
+### 与类似文献阅读 skill 的区别
 
-`literature-mentor` 是从零创建的，并不是从某个外部 GitHub 仓库复制而来。它的第一版来自一次需求讨论：agent 应该如何通过 Zotero MCP 辅助读论文，尽可能获取全文，像研究生导师一样解释文章，并带着用户逐图理解论文。
-
-原始设计聚焦生命科学和群体遗传学论文的导师式阅读流程：先给出文章整体概览，再逐图解读。每张图的理解都综合三类信息源：图例、正文中对应的 Results 或 Methods 段落，以及相关表格或补充材料。由于 Zotero MCP 不一定能直接提取 PDF 图片，这个 skill 会显式检查文字信息是否足够；如果视觉信息不足，会要求用户上传图片，避免基于不完整信息强行解读。
-
-| 参考来源 | 吸收或改编的内容 |
+| 对比对象 | 区别 |
 | --- | --- |
-| 初版无外部仓库 | 初始流程来自用户自己的需求：Zotero 支持的文献阅读、导师式解释、逐图停顿、结合牛基因组学和群体遗传学背景进行批判性分析。 |
-| `littleZ05/PaperLocus` | 后续吸收了理念层面的改进：方法/工具型论文与科学发现型论文的叙事类型判断、文献定位总结，以及更清晰地区分 claim、causal inference 和 extrapolation。 |
+| 通用论文总结器 | 不停留在摘要层面；会逐图停顿，让用户追问方法和概念。 |
+| PDF chat 工具 | 会显式判断图例和正文是否足够；需要视觉证据时会要求上传图片。 |
+| 类似 `littleZ05/PaperLocus` 的论文定位工具 | 借鉴了叙事类型和文献定位，但保留更深入的逐图阅读框架。 |
 
-评估 `PaperLocus` 后，核心流程并没有被替换。三信息源综合框架、逐图停顿机制和信息充分性检查都被保留下来，因为它们更适合深度读文献，而不是只做泛泛的论文定位。因此，这个 skill 本质上仍然是原创的，只是在后期从 `PaperLocus` 吸收了一层概念增强。
+### 参考来源
 
-它的实际强项在于阅读节奏：不是一次性丢出整篇论文摘要就结束，而是先建立文章地图，再在每张主要图后停下来，让用户追问方法或概念问题，确认理解后再继续。最后会输出一个三段式凝练总结：问题是啥、解法是啥、发现个啥。同时，它保持三维阅读视角：学习方法、批判证据、提取可迁移到用户自己基因组学项目中的启发。
+初版是围绕用户自己的工作流从零创建的：Zotero 支持的文献阅读、导师式解释、逐图停顿，以及结合群体遗传学背景的批判性分析。后续 `littleZ05/PaperLocus` 启发了叙事类型判断、文献定位总结，以及 claim、causal inference、extrapolation 的区分。
 
-### `scientific-paper-writing`
+## `scientific-paper-writing`
 
-`scientific-paper-writing` 不是从通用 academic writing prompt 复制来的。它最早是一个针对动物群体基因组学的领域化写作 skill，原名 `animal-popgen-paper-writing`。第一版围绕用户自己的研究场景构建：牛基因组学、群体遗传学、品种鉴定、基因组品种成分、选择、渗入、适应、imputation panel、结构变异、泛基因组和生命科学组学论文。
+### 简介
 
-v1 版本从 14 篇动物群体基因组学顶刊论文中提炼范式，例子覆盖牛驯化、景观基因组学、多组学、结构变异、泛基因组、山羊、绵羊、系统发育和群体基因组学方法。后来 skill 改名为 `life-sci-paper-writing`，再改为 `scientific-paper-writing`。名称变宽了，但核心设计没有变：从生命科学研究的证据逻辑出发，而不是套一个通用作文模板。
+生命科学论文写作 meta skill。覆盖从选题、标题、摘要、引言、方法、结果、讨论，到图表说明、引用管理、cover letter、rebuttal、投稿前自查、翻译和润色的完整论文工作流。
 
-后续这个 skill 选择性吸收了多个公开或社区 skill 仓库和写作资源的优点。目标不是把所有内容合并进来，而是只借鉴真正能提升审稿可读性、claim discipline 和 manuscript workflow 的机制。
+它特别适合生命科学和组学方向，尤其是动物基因组学、群体遗传学、驯化、适应、选择、渗入、景观基因组学、结构变异、泛基因组、imputation panel 和多组学整合。
 
-| 参考来源 | 吸收或改编的内容 |
+### 可以帮你做什么
+
+- 按证据优先逻辑起草或修改论文段落。
+- 改标题、摘要、引言、方法、结果、讨论和图注。
+- 润色段落，同时保留用户原意，减少 AI 味。
+- 检查 claim 是否有数字、效应量、引用或明确证据支撑。
+- 根据 reviewer psychology 准备 rebuttal 和 cover letter。
+- 投稿前进行 manuscript self-review。
+- 中英互译，同时保留科学表达的准确性。
+- 根据任务路由到 `references/tasks/`，并用 `references/meta/` 中的横向规则约束输出。
+
+### 典型用法
+
+```text
+Use scientific-paper-writing to revise this Results paragraph for a population-genomics paper.
+```
+
+```text
+Help me write a conservative Discussion paragraph from these findings. Avoid over-claiming.
+```
+
+```text
+Use this skill to draft a rebuttal to reviewer comment 2.
+```
+
+### 与类似论文写作 skill 的区别
+
+| 对比对象 | 区别 |
 | --- | --- |
-| 顶尖机构写作和作图资源 | 在 `references/meta/ai_artifacts.md` 中增强去 AI 味和正向写作指导，包括更具体的不确定性表达、节奏变化、Discussion 中的立场表达，以及适当的一人称判断句。 |
-| `Yuan1z0825/nature-skills` | 启发了 rebuttal 和润色流程的改进：Comment ID tracking、action tags、Hourglass check，以及 `style_polish.md` 中的 section-move 参考表。 |
-| `Imbad0202/academic-research-skills` | 启发了 `rebuttal.md` 中的 Step 0 审稿意见解码流程，以及 `self_review.md` 中的 Devil's Advocate self-check。 |
-| `Galaxy-Dawn/claude-scholar` | 启发了 `outline.md` 中的一句话论证检查，以及 `self_review.md` 中的 Claim Audit。 |
+| 通用 academic-writing prompt | 更关注生命科学证据链、reviewer cognition、保守 claim 和具体数据支撑。 |
+| 普通润色工具 | 不只是让句子更顺；还会检查逻辑、证据、术语、数字和 over-claim 风险。 |
+| 重型 multi-agent review 系统 | 保持轻量，通过任务路由处理问题，不默认引入打分 rubric 或大型 review team。 |
+| 偏哲学/人文学术写作 skill | 围绕 IMRAD、数据驱动 claim、方法可复现性、审稿回复和组学论文规范设计。 |
 
-也有一些参考被明确评估但没有采纳。例如，`lishix520/academic-paper-skills` 更偏哲学领域和 Claude Code 架构，不适合生命科学论文写作。其他仓库里的 0-100 打分 rubric、多 agent review team、PPTX 汇报生成、通用 Data Availability 模块等，也因为会让 skill 变重但不能改善核心写作流程而没有引入。
+### 参考来源
 
-所以最终的 `scientific-paper-writing` 是一个混合体：先根据具体生命科学研究领域重新创建，再选择性吸收其他 skill 系统中的好机制。它和通用 academic writing skill 的主要区别在于，它把论文写作看作证据路由和 reviewer cognition 问题：标题、摘要、结果段、discussion claim、figure caption、cover letter 和 rebuttal 都应该降低审稿人的理解成本，同时保守地表达数据真正能支持的结论。
+最早版本是领域化的 `animal-popgen-paper-writing`，v1 从 14 篇动物群体基因组学论文中提炼规则，后续扩展为 `life-sci-paper-writing`，最后成为 `scientific-paper-writing`。
 
-在内部结构上，它是一个 meta skill，而不是单一 prompt。`SKILL.md` 会把 title、abstract、introduction、methods、results、discussion、cover letter、rebuttal、self-review、style polish、translation 和 outline 等任务路由到对应的 task reference 文件。横向规则放在 `references/meta/` 下面，包括写作 workflow、引用和命名规范、over-claim 控制、reviewer psychology 和 AI-artifact cleanup。这比一个扁平的大 prompt 更容易维护和扩展。
-
-### `scientific-figure-making`
-
-`scientific-figure-making` 的来源不同。它的第一版基于 `ChenLiu-1996/figures4papers` 中的 `scientific-figure-making/` skill 目录，继承了初始结构：`SKILL.md` 以及 `api.md`、`design-theory.md`、`common-patterns.md`、`demos.md`、`tutorials.md` 等 reference 文件。
-
-原始版本已经是一个可用的出版级作图 skill，但后来进一步针对生命科学和群体遗传学场景重塑。当前版本不再只是一个 matplotlib 风格助手，而是一个 figure-planning workflow：先确定科学 claim，再确定证据层级，然后选择 backend 和图型。
-
-| 参考来源 | 吸收或改编的内容 |
+| 参考来源 | 吸收的思想 |
 | --- | --- |
-| `ChenLiu-1996/figures4papers` | 作为起始实现和文件结构来源，提供原始 publication-figure references 和 demo-oriented workflow。 |
-| `Yuan1z0825/nature-skills` / `nature-figure` | 启发了一次大改：加入 R backend 支持，包括 `ggplot2`、`patchwork`、`ComplexHeatmap`；引入 Figure Contract 哲学；新增 `figure-contract.md` 和 `r-backend.md`；重写 `SKILL.md`、`design-theory.md`、`api.md`、`common-patterns.md`；并加入 PCA scatter、ADMIXTURE bars、XP-EHH regional plot 等群体遗传学图型。 |
-| `AcademicForge/scientific-visualization` | 启发了定向增强：Okabe-Ito 色盲安全配色、灰度测试规则、期刊列宽参考，以及 `references/submission-checklist.md` 中的通用检查、群体遗传学专项检查和常见坑。 |
+| 顶尖机构写作和作图资源 | 更强的去 AI 味指导、不确定性表达、节奏变化和 Discussion 立场控制。 |
+| `Yuan1z0825/nature-skills` | Comment ID、rebuttal action tags、Hourglass check 和 section-move 参考。 |
+| `Imbad0202/academic-research-skills` | 审稿意见解码和 Devil's Advocate self-check。 |
+| `Galaxy-Dawn/claude-scholar` | 一句话论证检查和 Claim Audit。 |
 
-一些想法被评估后没有采纳。`AcademicForge/scientific-visualization` 中大量内联代码片段占用上下文但没有增加太多决策框架，因此没有引入。Flexoki 配色也被评估并拒绝，因为它更适合 UI/代码审美，不适合作为色盲安全的科学作图配色。
+评估但没有采纳：`lishix520/academic-paper-skills`，因为它和生命科学论文写作不够匹配；大型 numeric rubric、多 agent review team、PPTX 汇报生成和通用 Data Availability 模块，因为它们会增加复杂度但不能改善核心写作流程。
 
-最终版本把 `figures4papers` 的实用作图模式和更强的科学设计层结合起来。它强调的不是“画一张好看的图”，而是先问：这张图要支撑什么 claim？哪个 panel 承担主要证据？Python 还是 R 更合适？导出和印刷约束是什么？是否符合群体遗传学领域的图形规范？
+## `scientific-figure-making`
 
-它也明确限定了自己不该处理什么：interactive dashboards、没有出版目标的探索性 EDA 图、Illustrator/Figma-first infographic 都不在范围内。这样可以让它保持专注：制作可复现、能经受同行评审和印刷导出要求的 publication-grade figures。
+### 简介
 
-### `patent-disclosure-desktop`
+出版级科研作图 skill。它不是直接开始写代码，而是先确定科学结论，再确定证据层级、图型、backend、统计标注和导出约束。
 
-`patent-disclosure-desktop` 有一个非常明确的外部来源：`handsomestWei/patent-disclosure-skill`。它是从原版面向 Claude Code 的专利交底书工作流移植而来，并适配到 Claude Desktop macOS 环境。这个 credit 也保留在 `SKILL.md` 里。
+它支持 Python 和 R。Python 适合 matplotlib/seaborn 风格图；R 适合 `ggplot2`、`patchwork`、`ComplexHeatmap`、`ggtree` 或更符合群体遗传学惯例的图。
 
-核心 8 步流程继承自原版：信息收集、项目扫描、专利点挖掘、用户确认、联网查新、大纲预览、交底书撰写和自检。主要变化是运行环境适配，而不是专利写作逻辑本身的改变。
+### 可以帮你做什么
+
+- 围绕一个核心结论设计图。
+- 根据证据层级选择图型，而不是凭习惯画图。
+- 生成 grouped bars、trend lines、scatter plots、heatmaps、多面板图、Manhattan plots、XP-EHH regional plots、FST/pi heatmaps、PCA plots、ADMIXTURE/STRUCTURE bars、带 metadata 的系统发育树等。
+- 判断 Python 还是 R 更合适。
+- 应用出版级字体、配色、排版、图例、矢量导出和 DPI 规则。
+- 使用色盲安全配色和灰度检查。
+- 根据投稿要求和常见坑检查图。
+
+### 典型用法
+
+```text
+Use scientific-figure-making to design a multi-panel figure for this result.
+```
+
+```text
+Draw a PCA figure, but first help me define the core conclusion and evidence hierarchy.
+```
+
+```text
+Make an R ComplexHeatmap workflow for this annotated matrix.
+```
+
+### 与类似可视化 skill 的区别
+
+| 对比对象 | 区别 |
+| --- | --- |
+| 通用作图助手 | 先做 Figure Contract：结论、证据层级、图型、backend、统计和导出约束。 |
+| 探索性数据分析图 | 聚焦可投稿的出版级图，而不是临时 EDA 截图。 |
+| Web 可视化工具 | 明确排除 Plotly、Altair、Bokeh、dashboard 和 web-first interactive graphics。 |
+| Illustrator/Figma-first 信息图流程 | 聚焦可复现、代码驱动的科研图。 |
+
+### 参考来源
+
+原始结构来自 `ChenLiu-1996/figures4papers`，尤其是其中 `scientific-figure-making/` 目录和 reference 文件布局。后续吸收了：
+
+| 参考来源 | 吸收的思想 |
+| --- | --- |
+| `ChenLiu-1996/figures4papers` | 起始实现、出版级作图 reference、demo 和作图模式。 |
+| `Yuan1z0825/nature-skills` / `nature-figure` | R backend、Figure Contract、`figure-contract.md`、`r-backend.md` 和群体遗传学图型。 |
+| `AcademicForge/scientific-visualization` | Okabe-Ito 配色、灰度检查、期刊列宽参考和 submission checklist。 |
+
+评估但没有采纳：`AcademicForge/scientific-visualization` 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
+
+## `patent-disclosure-desktop`
+
+### 简介
+
+面向 Claude Desktop macOS 的中文专利挖掘和技术交底书 skill。它可以把项目材料、代码、设计文档或 PPT 转成候选专利点，并进一步生成结构化技术交底书草稿。
+
+### 可以帮你做什么
+
+- 收集技术主题、项目材料、发明人、权利人、输出路径和脱敏要求。
+- 扫描设计文档、代码、Word 文件、PPT 或用户粘贴的文字。
+- 提炼候选专利点，并让用户确认、合并或拆分。
+- 通过 CNIPA 公布公告和 Google Patents 做现有技术检索。
+- 撰写中文技术交底书，包括背景技术、发明内容、技术方案、实施例、附图说明和权利要求雏形。
+- 需要时生成 Mermaid 系统图和流程图。
+- 在工具可用时保存 `.md`，并尝试生成 `.docx`。
+- 识别迭代修改意图，修订已有草稿，保存新时间戳版本，避免覆盖旧稿。
+
+### 典型用法
+
+```text
+Use patent-disclosure-desktop to mine patent points from this project folder.
+```
+
+```text
+Help me draft a Chinese technical disclosure for this algorithm.
+```
+
+```text
+Revise section 3 of the existing disclosure and add one embodiment.
+```
+
+### 与类似专利写作流程的区别
+
+| 对比对象 | 区别 |
+| --- | --- |
+| 通用专利写作 prompt | 包含项目扫描、专利点挖掘、查新、交底书撰写、自检和迭代处理。 |
+| 只适用于 Claude Code 的专利流程 | 已适配 Claude Desktop macOS，支持 Desktop Commander 和降级逻辑。 |
+| 手工交底书模板 | 在撰写前先分析技术问题、技术效果、现有技术区别和权利要求雏形。 |
+
+### 参考来源
+
+这个 skill 有一个明确来源：`handsomestWei/patent-disclosure-skill`。当前版本是把原本面向 Claude Code 的工作流移植到 Claude Desktop macOS。
 
 | 原 Claude Code 版本 | 桌面适配版本 |
 | --- | --- |
-| 使用 `cnipa_epub_search.py` 和 Playwright 查新 | 使用内置 web search 检索 `epub.cnipa.gov.cn`、Google Patents 等来源。 |
-| Claude Code 文件和 shell 工具 | Desktop Commander 风格的文件读写，并带明确降级逻辑。 |
-| Python 脚本进行 Office 文档转换 | 三级降级：优先 Word MCP，其次本地脚本，最后 Markdown-only 输出。 |
-| 通过本地命令行工具渲染 Mermaid | 默认输出 Mermaid code block；如环境支持，可选用 `npx mmdc` 渲染。 |
-| 通过 helper scripts 记录迭代日志 | 使用更适合桌面环境的手工追加/更新流程。 |
+| 使用 `cnipa_epub_search.py` 和 Playwright | 使用内置 web search 检索 CNIPA 和 Google Patents。 |
+| Claude Code `Read` / `Write` / `Bash` | Desktop Commander 风格的文件读写和 shell 降级。 |
+| Python Office 转换脚本 | 优先 Word MCP，其次本地脚本，最终降级为 Markdown-only。 |
+| 通过命令行工具渲染 Mermaid | 默认输出 Mermaid code block，可选 `npx mmdc` 渲染。 |
+| helper script 记录迭代日志 | 桌面环境友好的手工追加/更新流程。 |
 
-这个 skill 没有混入其他外部 skill 仓库。它的价值主要在于移植：保留原始专利交底书结构，同时让这个流程能在不具备 Claude Code 完整工具链的桌面 agent 环境中使用。
-
-桌面版本还增加了实际写作中需要的 guardrails：不要求用户说出“迭代”这个词，也能识别继续修改交底书的意图；修订稿会另存为新的时间戳文件，不覆盖旧稿；保留修订记录；交付前在内部检查 claim 一致性、现有技术区别、术语统一、Mermaid 引用和脱敏情况。
+没有混入其他外部 skill 仓库。
 
 ## 安装
 
-把需要的 skill 目录安装或复制到你的 agent runtime 使用的 skill 文件夹中。如果运行时支持从 GitHub 安装，可以根据运行时约定安装整个仓库根目录，或安装某个指定子目录。
+### 方式一：安装整个仓库
 
-## 说明
+克隆仓库，然后把需要的 skill 目录复制到你的 agent runtime 使用的 skill 文件夹。
 
-- 这些 skills 尽可能写成可跨 agent 环境迁移的形式。
-- 部分工作流会提到 Zotero、web search、Python、R 或桌面文件读取工具等可选能力。skill 文本中包含工具不可用时的降级逻辑。
-- 不要把私人凭据、本地 secret 或 token 提交到这个仓库。
+```bash
+git clone https://github.com/guoyingwei6/scientific-research-skills.git
+```
 
+复制一个或多个 skill：
+
+```bash
+cp -R scientific-research-skills/literature-mentor ~/.codex/skills/
+cp -R scientific-research-skills/scientific-paper-writing ~/.codex/skills/
+cp -R scientific-research-skills/scientific-figure-making ~/.codex/skills/
+cp -R scientific-research-skills/patent-disclosure-desktop ~/.codex/skills/
+```
+
+请把 `~/.codex/skills/` 替换成你所用 agent 的实际目录。
+
+常见位置：
+
+| Runtime | 常见 skill 目录 |
+| --- | --- |
+| Codex | `~/.codex/skills/` |
+| Claude Code | `~/.claude/skills/` |
+| Claude Desktop | Project Knowledge 或 user skill directory，取决于你的设置 |
+| Gemini | `~/.gemini/skills/` |
+
+安装后重启 agent。
+
+### 方式二：只安装单个 skill
+
+如果你的 agent 支持从 GitHub 子目录安装，可以只安装需要的目录，例如：
+
+```text
+https://github.com/guoyingwei6/scientific-research-skills/tree/main/scientific-paper-writing
+```
+
+## 让 agent 帮你安装
+
+你也可以把下面的指令发给具备终端或文件访问权限的 agent：
+
+```text
+Install the scientific-paper-writing skill from:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Copy the scientific-paper-writing directory into your local skills directory, then verify that the skill is available after restart.
+```
+
+```text
+Install all skills from:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Copy literature-mentor, scientific-paper-writing, scientific-figure-making, and patent-disclosure-desktop into the current agent's skills directory. Do not copy unrelated files. Verify the installation.
+```
+
+Claude Desktop 可以这样说：
+
+```text
+Use the skill folders from this repository as Project Knowledge:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Install or import only the skill directories I need, and keep their SKILL.md files as the entrypoints.
+```
