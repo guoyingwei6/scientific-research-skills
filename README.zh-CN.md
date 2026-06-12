@@ -15,7 +15,7 @@
 | `scientific-figure-making` | 制作出版级科研图 | 图形设计方案、Python/R 作图代码、可投稿导出的图形规范 |
 | `patent-disclosure-desktop` | 挖掘专利点并撰写中文技术交底书 | 专利点列表、现有技术对比、交底书草稿、修订记录 |
 
-## `literature-mentor`
+## literature-mentor
 
 ### 简介
 
@@ -56,7 +56,7 @@
 
 初版是围绕用户自己的工作流从零创建的：Zotero 支持的文献阅读、导师式解释、逐图停顿，以及结合群体遗传学背景的批判性分析。后续 [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) 启发了叙事类型判断、文献定位总结，以及 claim、causal inference、extrapolation 的区分。
 
-## `scientific-paper-writing`
+## scientific-paper-writing
 
 ### 简介
 
@@ -111,7 +111,7 @@
 
 评估但没有采纳：[`lishix520/academic-paper-skills`](https://github.com/lishix520/academic-paper-skills)，因为它和生命科学论文写作不够匹配；大型 numeric rubric、多 agent review team、PPTX 汇报生成和通用 Data Availability 模块，因为它们会增加复杂度但不能改善核心写作流程。
 
-## `scientific-figure-making`
+## scientific-figure-making
 
 ### 简介
 
@@ -164,7 +164,7 @@
 
 评估但没有采纳：[`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
 
-## `patent-disclosure-desktop`
+## patent-disclosure-desktop
 
 ### 简介
 

@@ -15,7 +15,7 @@ These skills are designed for researchers who want an agent to do more than answ
 | `scientific-figure-making` | Producing publication-ready scientific figures | Figure plan, Python/R plotting code, export-ready figure guidance |
 | `patent-disclosure-desktop` | Mining patent points and drafting Chinese technical disclosure documents | Patent-point list, prior-art comparison, disclosure draft, revision record |
 
-## `literature-mentor`
+## literature-mentor
 
 ### Summary
 
@@ -56,7 +56,7 @@ Help me read this paper from Zotero like a supervisor. Focus on methods and reus
 
 The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later, [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) inspired several conceptual additions: narrative-type detection, literature-positioning summaries, and clearer separation between stated claims, causal inference, and extrapolation.
 
-## `scientific-paper-writing`
+## scientific-paper-writing
 
 ### Summary
 
@@ -113,7 +113,7 @@ Selected ideas were later adapted from other sources:
 
 Evaluated but not adopted: [`lishix520/academic-paper-skills`](https://github.com/lishix520/academic-paper-skills) because it was less aligned with life-sciences manuscript writing; broad numeric scoring rubrics, large multi-agent review teams, PPTX report generation, and generic Data Availability modules because they added weight without improving the core workflow.
 
-## `scientific-figure-making`
+## scientific-figure-making
 
 ### Summary
 
@@ -166,7 +166,7 @@ The original structure came from [`ChenLiu-1996/figures4papers`](https://github.
 
 Evaluated but not adopted: large inline plotting snippets from [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization), because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.
 
-## `patent-disclosure-desktop`
+## patent-disclosure-desktop
 
 ### Summary
 
