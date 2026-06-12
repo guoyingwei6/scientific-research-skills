@@ -1,6 +1,6 @@
 ---
 created: 2026-06-12 16:15
-updated: 2026-06-12 17:45
+updated: 2026-06-12 17:50
 ---
 # Scientific Research Skills
 
@@ -48,7 +48,21 @@ Some references were explicitly evaluated but not adopted. For example, `lishix5
 
 The resulting skill is therefore a hybrid: originally rebuilt for a concrete life-sciences research domain, then refined by selectively integrating good ideas from other skill systems. Its main difference from generic academic-writing skills is that it treats paper writing as an evidence-routing and reviewer-cognition problem: every title, abstract, result paragraph, discussion claim, figure caption, cover letter, and rebuttal should reduce reviewer effort while staying conservative about what the data can actually support.
 
-The `scientific-figure-making` skill also has its own lineage and external references. That history will be documented separately once its reference trail is reviewed.
+### `scientific-figure-making`
+
+The `scientific-figure-making` skill has a different origin. Its first version was based on the `scientific-figure-making/` skill folder from `ChenLiu-1996/figures4papers`, which provided the initial structure: `SKILL.md` plus reference files such as `api.md`, `design-theory.md`, `common-patterns.md`, `demos.md`, and `tutorials.md`.
+
+That original version was useful as a publication-figure skill, but it was later reshaped for life-sciences and population-genetics use cases. The current skill is no longer just a matplotlib style helper; it is a figure-planning workflow that begins with the scientific claim, chooses the appropriate evidence hierarchy, and then selects the backend and chart type.
+
+| Reference source | What was adopted or adapted |
+| --- | --- |
+| `ChenLiu-1996/figures4papers` | Served as the starting implementation and file structure, including the original publication-figure references and demo-oriented workflow. |
+| `Yuan1z0825/nature-skills` / `nature-figure` | Inspired a major redesign: R backend support with `ggplot2`, `patchwork`, and `ComplexHeatmap`; the Figure Contract philosophy; `figure-contract.md`; `r-backend.md`; rewritten `SKILL.md`, `design-theory.md`, `api.md`, and `common-patterns.md`; and population-genetics chart types such as PCA scatter plots, ADMIXTURE bars, and XP-EHH regional plots. |
+| `AcademicForge/scientific-visualization` | Inspired targeted additions: Okabe-Ito color-blind-safe palette guidance, grayscale testing rules, journal column-width references, and `references/submission-checklist.md` with general checks, population-genetics checks, and common pitfalls. |
+
+Some evaluated ideas were intentionally not adopted. Large inline code snippets from `AcademicForge/scientific-visualization` were left out because they consumed context without adding much decision structure. The Flexoki color palette was also evaluated and rejected because it was designed more for UI/code aesthetics than for color-blind-safe scientific figures.
+
+The resulting skill combines practical figure-generation patterns from `figures4papers` with a stronger scientific-design layer. Its emphasis is not merely "make a nice plot"; it asks what claim the figure must support, which panel carries the primary evidence, whether Python or R is the right backend, how the figure will survive print/export constraints, and whether domain-specific population-genetics conventions are being respected.
 
 ## Installation
 
