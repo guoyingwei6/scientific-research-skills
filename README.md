@@ -1,7 +1,9 @@
 ---
 created: 2026-06-12 16:15
-updated: 2026-06-12 18:08
+updated: 2026-06-12 18:18
 ---
+[中文版](README.zh-CN.md)
+
 # Scientific Research Skills
 
 Reusable agent skills for scientific research workflows, with an emphasis on literature reading, publication-grade figure making, life-sciences paper writing, and patent disclosure drafting.
