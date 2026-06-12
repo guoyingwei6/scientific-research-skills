@@ -24,12 +24,15 @@ A mentor-style paper reading skill. It uses Zotero or web sources to retrieve pa
 ### What it can help with
 
 - Find a paper by title, DOI, or Zotero library search.
-- Give a structured overview: research question, background gap, main innovation, data scale, and technical route.
+- Classify the paper's narrative type before reading: method/tool paper versus scientific-discovery paper.
+- Give a structured overview: research question, background gap, main innovation, data scale, technical route, and the design logic behind key methodological choices.
 - Explain each figure one by one instead of dumping a shallow full-paper summary.
 - Combine three information sources for figure interpretation: figure legends, corresponding Results/Methods text, and tables or supplementary data.
 - Detect when text is not enough and ask the user to upload the actual figure image.
+- Mark evidence at three levels: direct evidence, reasonable inference, and speculation beyond the paper.
 - Discuss methods, limitations, statistical choices, over-interpretation, and relevance to cattle genomics or population genetics.
-- End with a compact synthesis: what problem the paper solves, how it solves it, and what it found.
+- End with a compact synthesis: what problem the paper solves, how it solves it, what it found, and where it sits in the field.
+- Generate research-oriented follow-up questions about hidden assumptions, boundary conditions, failure cases, and transferability to the user's own data.
 
 ### Typical prompts
 
@@ -47,7 +50,7 @@ Help me read this paper from Zotero like a supervisor. Focus on methods and reus
 | --- | --- |
 | Generic paper summarizers | Does not stop at abstract-level summaries; it pauses after each major figure and supports interactive questioning. |
 | PDF chat tools | Explicitly checks whether figure legends and text are enough, and asks for images when visual evidence is required. |
-| `littleZ05/PaperLocus`-style paper positioning | Borrowed useful ideas such as narrative type and literature positioning, but keeps a deeper figure-by-figure reading workflow. |
+| `littleZ05/PaperLocus`-style paper positioning | Borrowed useful ideas such as narrative type, literature positioning, and claim/inference separation, but keeps a deeper figure-by-figure reading workflow. |
 
 ### References and lineage
 
