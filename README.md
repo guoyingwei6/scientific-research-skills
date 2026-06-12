@@ -1,6 +1,6 @@
 ---
 created: 2026-06-12 16:15
-updated: 2026-06-12 17:50
+updated: 2026-06-12 17:54
 ---
 # Scientific Research Skills
 
@@ -63,6 +63,22 @@ That original version was useful as a publication-figure skill, but it was later
 Some evaluated ideas were intentionally not adopted. Large inline code snippets from `AcademicForge/scientific-visualization` were left out because they consumed context without adding much decision structure. The Flexoki color palette was also evaluated and rejected because it was designed more for UI/code aesthetics than for color-blind-safe scientific figures.
 
 The resulting skill combines practical figure-generation patterns from `figures4papers` with a stronger scientific-design layer. Its emphasis is not merely "make a nice plot"; it asks what claim the figure must support, which panel carries the primary evidence, whether Python or R is the right backend, how the figure will survive print/export constraints, and whether domain-specific population-genetics conventions are being respected.
+
+### `patent-disclosure-desktop`
+
+The `patent-disclosure-desktop` skill has a single clear external source: `handsomestWei/patent-disclosure-skill`. It was ported from that original Claude Code-oriented patent disclosure workflow and adapted for Claude Desktop on macOS. The skill itself keeps this credit in `SKILL.md`.
+
+The core eight-step workflow was inherited from the original version: intake, project scan, patent-point mining, user confirmation, novelty search, outline, disclosure drafting, and self-review. The main changes were environment adaptations rather than a change in the patent-writing logic.
+
+| Original Claude Code version | Desktop-adapted version |
+| --- | --- |
+| `cnipa_epub_search.py` with Playwright-based search | Built-in web search against sources such as `epub.cnipa.gov.cn` and Google Patents. |
+| Claude Code file and shell tools | Desktop Commander-style file reading/writing with explicit fallback behavior. |
+| Python scripts for Office document conversion | Tiered fallback: Word MCP if available, local scripts if available, or Markdown-only output. |
+| Mermaid rendering through local command-line tooling | Mermaid code blocks by default, with optional rendering through `npx mmdc` if the environment supports it. |
+| Iteration logs through helper scripts | Desktop-friendly manual append/update flow. |
+
+No other external skill repository was mixed into this one. Its value is mainly in the port: it preserves the original patent-disclosure structure while making the workflow usable in a desktop agent environment that may not have Claude Code's exact toolchain.
 
 ## Installation
 
