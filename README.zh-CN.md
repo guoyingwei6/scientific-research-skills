@@ -37,11 +37,11 @@
 ### 典型用法
 
 ```text
-Use literature-mentor to explain this DOI figure by figure: ...
+使用 literature-mentor 逐图解读这篇论文的 DOI：...
 ```
 
 ```text
-Help me read this paper from Zotero like a supervisor. Focus on methods and reusable ideas.
+请像导师一样带我读 Zotero 里的这篇论文，重点看方法和可迁移的研究思路。
 ```
 
 ### 与类似文献阅读 skill 的区别
@@ -78,15 +78,15 @@ Help me read this paper from Zotero like a supervisor. Focus on methods and reus
 ### 典型用法
 
 ```text
-Use scientific-paper-writing to revise this Results paragraph for a population-genomics paper.
+使用 scientific-paper-writing 修改这段群体基因组学论文的 Results。
 ```
 
 ```text
-Help me write a conservative Discussion paragraph from these findings. Avoid over-claiming.
+请根据这些结果写一段保守的 Discussion，避免 over-claim。
 ```
 
 ```text
-Use this skill to draft a rebuttal to reviewer comment 2.
+请用这个 skill 起草对 reviewer comment 2 的回复。
 ```
 
 ### 与类似论文写作 skill 的区别
@@ -132,15 +132,15 @@ Use this skill to draft a rebuttal to reviewer comment 2.
 ### 典型用法
 
 ```text
-Use scientific-figure-making to design a multi-panel figure for this result.
+使用 scientific-figure-making 为这个结果设计一张多面板科研图。
 ```
 
 ```text
-Draw a PCA figure, but first help me define the core conclusion and evidence hierarchy.
+帮我画 PCA 图，但先帮我明确核心结论和证据层级。
 ```
 
 ```text
-Make an R ComplexHeatmap workflow for this annotated matrix.
+请为这个带注释的矩阵设计一个 R ComplexHeatmap 作图流程。
 ```
 
 ### 与类似可视化 skill 的区别
@@ -184,15 +184,15 @@ Make an R ComplexHeatmap workflow for this annotated matrix.
 ### 典型用法
 
 ```text
-Use patent-disclosure-desktop to mine patent points from this project folder.
+使用 patent-disclosure-desktop 从这个项目目录中挖掘专利点。
 ```
 
 ```text
-Help me draft a Chinese technical disclosure for this algorithm.
+帮我为这个算法起草一份中文技术交底书。
 ```
 
 ```text
-Revise section 3 of the existing disclosure and add one embodiment.
+请修改已有交底书的第 3 章，并补充一个实施例。
 ```
 
 ### 与类似专利写作流程的区别
