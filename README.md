@@ -50,11 +50,11 @@ Help me read this paper from Zotero like a supervisor. Focus on methods and reus
 | --- | --- |
 | Generic paper summarizers | Does not stop at abstract-level summaries; it pauses after each major figure and supports interactive questioning. |
 | PDF chat tools | Explicitly checks whether figure legends and text are enough, and asks for images when visual evidence is required. |
-| `littleZ05/PaperLocus`-style paper positioning | Borrowed useful ideas such as narrative type, literature positioning, and claim/inference separation, but keeps a deeper figure-by-figure reading workflow. |
+| [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus)-style paper positioning | Borrowed useful ideas such as narrative type, literature positioning, and claim/inference separation, but keeps a deeper figure-by-figure reading workflow. |
 
 ### References and lineage
 
-The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later, `littleZ05/PaperLocus` inspired several conceptual additions: narrative-type detection, literature-positioning summaries, and clearer separation between stated claims, causal inference, and extrapolation.
+The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later, [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) inspired several conceptual additions: narrative-type detection, literature-positioning summaries, and clearer separation between stated claims, causal inference, and extrapolation.
 
 ## `scientific-paper-writing`
 
@@ -107,11 +107,11 @@ Selected ideas were later adapted from other sources:
 | Reference source | Adapted ideas |
 | --- | --- |
 | Top-institution writing and figure-making resources | Stronger anti-AI-writing guidance, uncertainty phrasing, rhythm variation, and Discussion stance control. |
-| `Yuan1z0825/nature-skills` | Comment IDs, action tags for rebuttal, Hourglass checks, and section-move references. |
-| `Imbad0202/academic-research-skills` | Reviewer-comment decoding and Devil's Advocate self-check. |
-| `Galaxy-Dawn/claude-scholar` | One-sentence argument checks and Claim Audit. |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | Comment IDs, action tags for rebuttal, Hourglass checks, and section-move references. |
+| [`Imbad0202/academic-research-skills`](https://github.com/Imbad0202/academic-research-skills) | Reviewer-comment decoding and Devil's Advocate self-check. |
+| [`Galaxy-Dawn/claude-scholar`](https://github.com/Galaxy-Dawn/claude-scholar) | One-sentence argument checks and Claim Audit. |
 
-Evaluated but not adopted: `lishix520/academic-paper-skills` because it was less aligned with life-sciences manuscript writing; broad numeric scoring rubrics, large multi-agent review teams, PPTX report generation, and generic Data Availability modules because they added weight without improving the core workflow.
+Evaluated but not adopted: [`lishix520/academic-paper-skills`](https://github.com/lishix520/academic-paper-skills) because it was less aligned with life-sciences manuscript writing; broad numeric scoring rubrics, large multi-agent review teams, PPTX report generation, and generic Data Availability modules because they added weight without improving the core workflow.
 
 ## `scientific-figure-making`
 
@@ -156,15 +156,15 @@ Make an R ComplexHeatmap workflow for this annotated matrix.
 
 ### References and lineage
 
-The original structure came from `ChenLiu-1996/figures4papers`, especially the `scientific-figure-making/` folder and its reference-file layout. Later changes adapted ideas from:
+The original structure came from [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers), especially the `scientific-figure-making/` folder and its reference-file layout. Later changes adapted ideas from:
 
 | Reference source | Adapted ideas |
 | --- | --- |
-| `ChenLiu-1996/figures4papers` | Starting implementation, publication-figure references, demos, and plotting patterns. |
-| `Yuan1z0825/nature-skills` / `nature-figure` | R backend, Figure Contract, `figure-contract.md`, `r-backend.md`, and population-genetics figure types. |
-| `AcademicForge/scientific-visualization` | Okabe-Ito palette, grayscale checks, journal column-width references, and submission checklist. |
+| [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers) | Starting implementation, publication-figure references, demos, and plotting patterns. |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) / `nature-figure` | R backend, Figure Contract, `figure-contract.md`, `r-backend.md`, and population-genetics figure types. |
+| [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) | Okabe-Ito palette, grayscale checks, journal column-width references, and submission checklist. |
 
-Evaluated but not adopted: large inline plotting snippets from `AcademicForge/scientific-visualization`, because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.
+Evaluated but not adopted: large inline plotting snippets from [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization), because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.
 
 ## `patent-disclosure-desktop`
 
@@ -207,7 +207,7 @@ Revise section 3 of the existing disclosure and add one embodiment.
 
 ### References and lineage
 
-This skill has one clear external source: `handsomestWei/patent-disclosure-skill`. The current version ports that Claude Code-oriented workflow to Claude Desktop macOS.
+This skill has one clear external source: [`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill). The current version ports that Claude Code-oriented workflow to Claude Desktop macOS.
 
 | Original Claude Code version | Desktop-adapted version |
 | --- | --- |

@@ -50,11 +50,11 @@
 | --- | --- |
 | 通用论文总结器 | 不停留在摘要层面；会逐图停顿，让用户追问方法和概念。 |
 | PDF chat 工具 | 会显式判断图例和正文是否足够；需要视觉证据时会要求上传图片。 |
-| 类似 `littleZ05/PaperLocus` 的论文定位工具 | 借鉴了叙事类型、文献定位和 claim/inference 分离，但保留更深入的逐图阅读框架。 |
+| 类似 [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) 的论文定位工具 | 借鉴了叙事类型、文献定位和 claim/inference 分离，但保留更深入的逐图阅读框架。 |
 
 ### 参考来源
 
-初版是围绕用户自己的工作流从零创建的：Zotero 支持的文献阅读、导师式解释、逐图停顿，以及结合群体遗传学背景的批判性分析。后续 `littleZ05/PaperLocus` 启发了叙事类型判断、文献定位总结，以及 claim、causal inference、extrapolation 的区分。
+初版是围绕用户自己的工作流从零创建的：Zotero 支持的文献阅读、导师式解释、逐图停顿，以及结合群体遗传学背景的批判性分析。后续 [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) 启发了叙事类型判断、文献定位总结，以及 claim、causal inference、extrapolation 的区分。
 
 ## `scientific-paper-writing`
 
@@ -105,11 +105,11 @@
 | 参考来源 | 吸收的思想 |
 | --- | --- |
 | 顶尖机构写作和作图资源 | 更强的去 AI 味指导、不确定性表达、节奏变化和 Discussion 立场控制。 |
-| `Yuan1z0825/nature-skills` | Comment ID、rebuttal action tags、Hourglass check 和 section-move 参考。 |
-| `Imbad0202/academic-research-skills` | 审稿意见解码和 Devil's Advocate self-check。 |
-| `Galaxy-Dawn/claude-scholar` | 一句话论证检查和 Claim Audit。 |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | Comment ID、rebuttal action tags、Hourglass check 和 section-move 参考。 |
+| [`Imbad0202/academic-research-skills`](https://github.com/Imbad0202/academic-research-skills) | 审稿意见解码和 Devil's Advocate self-check。 |
+| [`Galaxy-Dawn/claude-scholar`](https://github.com/Galaxy-Dawn/claude-scholar) | 一句话论证检查和 Claim Audit。 |
 
-评估但没有采纳：`lishix520/academic-paper-skills`，因为它和生命科学论文写作不够匹配；大型 numeric rubric、多 agent review team、PPTX 汇报生成和通用 Data Availability 模块，因为它们会增加复杂度但不能改善核心写作流程。
+评估但没有采纳：[`lishix520/academic-paper-skills`](https://github.com/lishix520/academic-paper-skills)，因为它和生命科学论文写作不够匹配；大型 numeric rubric、多 agent review team、PPTX 汇报生成和通用 Data Availability 模块，因为它们会增加复杂度但不能改善核心写作流程。
 
 ## `scientific-figure-making`
 
@@ -154,15 +154,15 @@
 
 ### 参考来源
 
-原始结构来自 `ChenLiu-1996/figures4papers`，尤其是其中 `scientific-figure-making/` 目录和 reference 文件布局。后续吸收了：
+原始结构来自 [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers)，尤其是其中 `scientific-figure-making/` 目录和 reference 文件布局。后续吸收了：
 
 | 参考来源 | 吸收的思想 |
 | --- | --- |
-| `ChenLiu-1996/figures4papers` | 起始实现、出版级作图 reference、demo 和作图模式。 |
-| `Yuan1z0825/nature-skills` / `nature-figure` | R backend、Figure Contract、`figure-contract.md`、`r-backend.md` 和群体遗传学图型。 |
-| `AcademicForge/scientific-visualization` | Okabe-Ito 配色、灰度检查、期刊列宽参考和 submission checklist。 |
+| [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers) | 起始实现、出版级作图 reference、demo 和作图模式。 |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) / `nature-figure` | R backend、Figure Contract、`figure-contract.md`、`r-backend.md` 和群体遗传学图型。 |
+| [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) | Okabe-Ito 配色、灰度检查、期刊列宽参考和 submission checklist。 |
 
-评估但没有采纳：`AcademicForge/scientific-visualization` 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
+评估但没有采纳：[`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
 
 ## `patent-disclosure-desktop`
 
@@ -205,7 +205,7 @@
 
 ### 参考来源
 
-这个 skill 有一个明确来源：`handsomestWei/patent-disclosure-skill`。当前版本是把原本面向 Claude Code 的工作流移植到 Claude Desktop macOS。
+这个 skill 有一个明确来源：[`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill)。当前版本是把原本面向 Claude Code 的工作流移植到 Claude Desktop macOS。
 
 | 原 Claude Code 版本 | 桌面适配版本 |
 | --- | --- |
