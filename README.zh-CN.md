@@ -262,24 +262,24 @@ https://github.com/guoyingwei6/scientific-research-skills/tree/main/scientific-p
 你也可以把下面的指令发给具备终端或文件访问权限的 agent：
 
 ```text
-Install the scientific-paper-writing skill from:
+请从下面这个仓库安装 scientific-paper-writing skill：
 https://github.com/guoyingwei6/scientific-research-skills
 
-Copy the scientific-paper-writing directory into your local skills directory, then verify that the skill is available after restart.
+把 scientific-paper-writing 目录复制到你的本地 skills 目录。重启后请验证这个 skill 是否已经可用。
 ```
 
 ```text
-Install all skills from:
+请从下面这个仓库安装全部 skills：
 https://github.com/guoyingwei6/scientific-research-skills
 
-Copy literature-mentor, scientific-paper-writing, scientific-figure-making, and patent-disclosure-desktop into the current agent's skills directory. Do not copy unrelated files. Verify the installation.
+把 literature-mentor、scientific-paper-writing、scientific-figure-making 和 patent-disclosure-desktop 复制到当前 agent 的 skills 目录。不要复制无关文件。安装完成后请验证这些 skills 是否可用。
 ```
 
 Claude Desktop 可以这样说：
 
 ```text
-Use the skill folders from this repository as Project Knowledge:
+请把这个仓库里的 skill 文件夹作为 Project Knowledge 使用：
 https://github.com/guoyingwei6/scientific-research-skills
 
-Install or import only the skill directories I need, and keep their SKILL.md files as the entrypoints.
+只安装或导入我需要的 skill 目录，并把每个目录里的 SKILL.md 作为入口文件。
 ```
