@@ -10,7 +10,7 @@ These skills are designed for researchers who want an agent to do more than answ
 
 | Skill | Best for | Main output |
 | --- | --- | --- |
-| `literature-mentor` | Understanding a paper deeply, especially figure by figure | Paper overview, figure-by-figure explanation, critique, and research ideas |
+| `literature-mentor` | Quickly triaging, mentor-reading, or research-reviewing a paper | Reading-mode selection, claim/evidence preflight, figure-by-figure explanation, critique, minimal reproduction, and research ideas |
 | `scientific-paper-writing` | Writing or revising life-sciences and omics manuscripts | Titles, abstracts, IMRAD sections, rebuttals, cover letters, polishing, self-review |
 | `scientific-figure-making` | Producing publication-ready scientific figures | Figure plan, Python/R plotting code, export-ready figure guidance |
 | `patent-disclosure-desktop` | Mining patent points and drafting Chinese technical disclosure documents | Patent-point list, prior-art comparison, disclosure draft, revision record |
@@ -19,25 +19,39 @@ These skills are designed for researchers who want an agent to do more than answ
 
 ### Summary
 
-A mentor-style paper reading skill. It uses Zotero or web sources to retrieve papers, then helps the user understand the paper as if guided by a graduate supervisor: first the whole story, then each figure, then the methodological lessons and research inspiration.
+A mentor-style paper reading skill. It uses Zotero or web sources to retrieve papers and automatically chooses a quick triage, mentor deep-read, or research-review mode based on the user's intent. It can first judge whether a paper is worth deep reading, or guide the user figure by figure like a graduate supervisor, then synthesize methodological lessons, limitations, minimal reproduction ideas, and research inspiration.
 
 ### What it can help with
 
 - Find a paper by title, DOI, or Zotero library search.
+- Automatically choose a reading mode: quick triage, mentor deep-read, or research review; users can also name a mode explicitly.
 - Classify the paper's narrative type before reading: method/tool paper versus scientific-discovery paper.
+- Run a pre-reading check for three anchors: core claim, key evidence chain, and key baseline / prior work.
+- Calibrate novelty when needed by checking 2-3 closely related papers, so new data, new populations, or new framing are not mistaken for real methodological novelty.
+- Reconstruct the authors' thinking path from prior failure modes, field bottlenecks, and adjacent-field inspiration.
 - Give a structured overview: research question, background gap, main innovation, data scale, technical route, and the design logic behind key methodological choices.
 - Explain each figure one by one instead of dumping a shallow full-paper summary.
 - Combine three information sources for figure interpretation: figure legends, corresponding Results/Methods text, and tables or supplementary data.
 - Detect when text is not enough and ask the user to upload the actual figure image.
-- Mark evidence at three levels: direct evidence, reasonable inference, and speculation beyond the paper.
+- Mark evidence at four levels: explicitly stated by the paper, established by related literature, evidence-based reasonable inference, and still-uncertain speculation.
 - Discuss methods, limitations, statistical choices, over-interpretation, and relevance to cattle genomics or population genetics.
 - End with a compact synthesis: what problem the paper solves, how it solves it, what it found, and where it sits in the field.
 - Generate research-oriented follow-up questions about hidden assumptions, boundary conditions, failure cases, and transferability to the user's own data.
+- Design a one-week minimal reproduction and strongest counterexample to test whether the core claim holds up.
+- Propose non-incremental follow-up ideas from the most fragile assumption, rather than merely changing species, data, or adding a module.
 
 ### Typical prompts
 
 ```text
+Quickly judge whether this paper is worth reading deeply: ...
+```
+
+```text
 Use literature-mentor to explain this DOI figure by figure: ...
+```
+
+```text
+Review this paper as a research idea. Focus on the core claim, fragile assumptions, minimal reproduction, and follow-up.
 ```
 
 ```text
@@ -50,11 +64,11 @@ Help me read this paper from Zotero like a supervisor. Focus on methods and reus
 | --- | --- |
 | Generic paper summarizers | Does not stop at abstract-level summaries; it pauses after each major figure and supports interactive questioning. |
 | PDF chat tools | Explicitly checks whether figure legends and text are enough, and asks for images when visual evidence is required. |
-| [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus)-style paper positioning | Borrowed useful ideas such as narrative type, literature positioning, and claim/inference separation, but keeps a deeper figure-by-figure reading workflow. |
+| [`FeijiangHan/PaperForge`](https://github.com/FeijiangHan/PaperForge)-style paper critique frameworks | Borrows claim/evidence preflight, fragile assumptions, minimal reproduction, strongest counterexamples, and non-incremental follow-up design, but keeps a deeper interactive figure-by-figure reading workflow. |
 
 ### References and lineage
 
-The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later, [`littleZ05/PaperLocus`](https://github.com/littleZ05/PaperLocus) inspired several conceptual additions: narrative-type detection, literature-positioning summaries, and clearer separation between stated claims, causal inference, and extrapolation.
+The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later versions incorporated the research-judgment framework from [`FeijiangHan/PaperForge`](https://github.com/FeijiangHan/PaperForge), adding automatic reading modes, three-anchor preflight, novelty calibration, author-thinking reconstruction, four-level evidence discipline, one-week minimal reproduction, strongest counterexample design, and non-incremental follow-up generation.
 
 ## scientific-paper-writing
 
