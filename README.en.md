@@ -1,0 +1,312 @@
+[中文版](README.md)
+
+# Scientific Research Skills
+
+Agent skills for scientific research work: reading papers deeply, writing life-sciences manuscripts, making publication-ready figures, and preparing Chinese patent workbench materials.
+
+These skills are designed for researchers who want an agent to do more than answer one-off questions. Each skill defines a workflow, quality checks, fallback behavior, and domain-specific judgment so the agent can work like a research assistant rather than a generic chatbot.
+
+## Skills at a glance
+
+| Skill | Best for | Main output |
+| --- | --- | --- |
+| `literature-mentor` | Quickly triaging, mentor-reading, or research-reviewing a paper | Reading-mode selection, claim/evidence preflight, figure-by-figure explanation, critique, minimal reproduction, and research ideas |
+| `scientific-paper-writing` | Writing or revising life-sciences and omics manuscripts | Titles, abstracts, IMRAD sections, rebuttals, cover letters, polishing, self-review |
+| `scientific-figure-making` | Producing publication-ready scientific figures | Figure plan, Python/R plotting code, export-ready figure guidance |
+| `patent-workbench-skill` | Mining patent points, drafting technical disclosures, and assisting with office-action responses | Patent-point list, prior-art comparison, disclosure draft, OA response draft, revision record |
+
+## literature-mentor
+
+### Summary
+
+A mentor-style paper reading skill. It uses Zotero or web sources to retrieve papers and automatically chooses a quick triage, mentor deep-read, or research-review mode based on the user's intent. It can first judge whether a paper is worth deep reading, or guide the user figure by figure like a graduate supervisor, then synthesize methodological lessons, limitations, minimal reproduction ideas, and research inspiration.
+
+### What it can help with
+
+- Find a paper by title, DOI, or Zotero library search.
+- Automatically choose a reading mode: quick triage, mentor deep-read, or research review; users can also name a mode explicitly.
+- Classify the paper's narrative type before reading: method/tool paper versus scientific-discovery paper.
+- Run a pre-reading check for three anchors: core claim, key evidence chain, and key baseline / prior work.
+- Calibrate novelty when needed by checking 2-3 closely related papers, so new data, new populations, or new framing are not mistaken for real methodological novelty.
+- Reconstruct the authors' thinking path from prior failure modes, field bottlenecks, and adjacent-field inspiration.
+- Give a structured overview: research question, background gap, main innovation, data scale, technical route, and the design logic behind key methodological choices.
+- Explain each figure one by one instead of dumping a shallow full-paper summary.
+- Combine three information sources for figure interpretation: figure legends, corresponding Results/Methods text, and tables or supplementary data.
+- Detect when text is not enough and ask the user to upload the actual figure image.
+- Mark evidence at four levels: explicitly stated by the paper, established by related literature, evidence-based reasonable inference, and still-uncertain speculation.
+- Discuss methods, limitations, statistical choices, over-interpretation, and relevance to cattle genomics or population genetics.
+- End with a compact synthesis: what problem the paper solves, how it solves it, what it found, and where it sits in the field.
+- Generate research-oriented follow-up questions about hidden assumptions, boundary conditions, failure cases, and transferability to the user's own data.
+- Design a one-week minimal reproduction and strongest counterexample to test whether the core claim holds up.
+- Propose non-incremental follow-up ideas from the most fragile assumption, rather than merely changing species, data, or adding a module.
+
+### Typical prompts
+
+```text
+Quickly judge whether this paper is worth reading deeply: ...
+```
+
+```text
+Use literature-mentor to explain this DOI figure by figure: ...
+```
+
+```text
+Review this paper as a research idea. Focus on the core claim, fragile assumptions, minimal reproduction, and follow-up.
+```
+
+```text
+Help me read this paper from Zotero like a supervisor. Focus on methods and reusable ideas.
+```
+
+### How it differs from similar paper-reading skills
+
+| Compared with | Difference |
+| --- | --- |
+| Generic paper summarizers | Does not stop at abstract-level summaries; it pauses after each major figure and supports interactive questioning. |
+| PDF chat tools | Explicitly checks whether figure legends and text are enough, and asks for images when visual evidence is required. |
+| [`FeijiangHan/PaperForge`](https://github.com/FeijiangHan/PaperForge)-style paper critique frameworks | Borrows claim/evidence preflight, fragile assumptions, minimal reproduction, strongest counterexamples, and non-incremental follow-up design, but keeps a deeper interactive figure-by-figure reading workflow. |
+
+### References and lineage
+
+The first version was built from scratch around the user's own workflow: Zotero-backed paper reading, mentor-style explanation, and population-genetics context. Later versions incorporated the research-judgment framework from [`FeijiangHan/PaperForge`](https://github.com/FeijiangHan/PaperForge), adding automatic reading modes, three-anchor preflight, novelty calibration, author-thinking reconstruction, four-level evidence discipline, one-week minimal reproduction, strongest counterexample design, and non-incremental follow-up generation.
+
+## scientific-paper-writing
+
+### Summary
+
+A life-sciences manuscript writing meta-skill. It covers the full manuscript lifecycle: ideation, title, abstract, introduction, methods, results, discussion, figures and tables, citation handling, cover letter, rebuttal, self-review, translation, and style polishing.
+
+It is built for life-sciences and omics work, especially animal genomics, population genetics, domestication, adaptation, selection, introgression, landscape genomics, structural variation, pangenomes, imputation panels, and multi-omics integration.
+
+### What it can help with
+
+- Draft or revise manuscript sections with evidence-first logic.
+- Improve titles, abstracts, introductions, methods, results, discussion, and figure captions.
+- Polish paragraphs while preserving the user's meaning and avoiding AI-sounding prose.
+- Check whether claims are supported by numbers, effect sizes, citations, or explicit evidence.
+- Prepare rebuttals and cover letters with reviewer psychology in mind.
+- Run manuscript self-review before submission.
+- Translate between Chinese and English while preserving scientific precision.
+- Route tasks into specialized reference files under `references/tasks/` and shared rules under `references/meta/`.
+
+### Typical prompts
+
+```text
+Use scientific-paper-writing to revise this Results paragraph for a population-genomics paper.
+```
+
+```text
+Help me write a conservative Discussion paragraph from these findings. Avoid over-claiming.
+```
+
+```text
+Use this skill to draft a rebuttal to reviewer comment 2.
+```
+
+### How it differs from similar academic-writing skills
+
+| Compared with | Difference |
+| --- | --- |
+| Generic academic-writing prompts | Focuses on life-sciences evidence chains, reviewer cognition, conservative claims, and concrete data support. |
+| Field-agnostic polishing tools | Does not merely make text smoother; it checks logic, evidence, terminology, numbers, and over-claim risk. |
+| Heavy multi-agent review systems | Keeps the workflow lightweight and task-routed instead of adding scoring rubrics or large review teams by default. |
+| Philosophy or humanities-oriented academic skills | Built around IMRAD, data-driven claims, methods reproducibility, reviewer response, and omics manuscript conventions. |
+
+### References and lineage
+
+The first version began as a domain-specific `animal-popgen-paper-writing` skill. Its v1 rules were distilled from 14 animal population-genomics papers, then expanded into `life-sci-paper-writing` and finally `scientific-paper-writing`.
+
+Selected ideas were later adapted from other sources:
+
+| Reference source | Adapted ideas |
+| --- | --- |
+| Top-institution writing and figure-making resources | Stronger anti-AI-writing guidance, uncertainty phrasing, rhythm variation, and Discussion stance control. |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | Comment IDs, action tags for rebuttal, Hourglass checks, and section-move references. |
+| [`Imbad0202/academic-research-skills`](https://github.com/Imbad0202/academic-research-skills) | Reviewer-comment decoding and Devil's Advocate self-check. |
+| [`Galaxy-Dawn/claude-scholar`](https://github.com/Galaxy-Dawn/claude-scholar) | One-sentence argument checks and Claim Audit. |
+
+Evaluated but not adopted: [`lishix520/academic-paper-skills`](https://github.com/lishix520/academic-paper-skills) because it was less aligned with life-sciences manuscript writing; broad numeric scoring rubrics, large multi-agent review teams, PPTX report generation, and generic Data Availability modules because they added weight without improving the core workflow.
+
+## scientific-figure-making
+
+### Summary
+
+A publication-figure skill for scientific plots. It starts from the scientific claim, then decides the evidence hierarchy, chart type, backend, statistics, and export constraints before writing plotting code.
+
+It supports both Python and R workflows. Python is used for matplotlib/seaborn-style figures; R is used when `ggplot2`, `patchwork`, `ComplexHeatmap`, `ggtree`, or population-genetics plotting conventions are a better fit.
+
+### What it can help with
+
+- Plan a figure around one core conclusion.
+- Choose chart types based on evidence hierarchy, not habit.
+- Generate grouped bars, trends, scatter plots, heatmaps, multi-panel layouts, Manhattan plots, XP-EHH regional plots, FST/pi heatmaps, PCA plots, ADMIXTURE/STRUCTURE bars, and phylogenetic trees with metadata.
+- Decide whether Python or R is the right backend.
+- Apply publication-oriented typography, palettes, layout, legends, vector export, and DPI rules.
+- Use color-blind-safe palettes and grayscale checks.
+- Check figures against submission requirements and common pitfalls.
+
+### Typical prompts
+
+```text
+Use scientific-figure-making to design a multi-panel figure for this result.
+```
+
+```text
+Draw a PCA figure, but first help me define the core conclusion and evidence hierarchy.
+```
+
+```text
+Make an R ComplexHeatmap workflow for this annotated matrix.
+```
+
+### How it differs from similar visualization skills
+
+| Compared with | Difference |
+| --- | --- |
+| Generic plotting helpers | Starts with the figure contract: conclusion, evidence hierarchy, chart type, backend, statistics, and export constraints. |
+| Exploratory data analysis plotting | Focuses on publication-ready figures, not quick EDA screenshots. |
+| Web visualization tools | Explicitly excludes Plotly, Altair, Bokeh, dashboards, and web-first interactive graphics. |
+| Illustrator/Figma-first infographic workflows | Focuses on reproducible scientific plots and code-backed figure generation. |
+
+### References and lineage
+
+The original structure came from [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers), especially the `scientific-figure-making/` folder and its reference-file layout. Later changes adapted ideas from:
+
+| Reference source | Adapted ideas |
+| --- | --- |
+| [`ChenLiu-1996/figures4papers`](https://github.com/ChenLiu-1996/figures4papers) | Starting implementation, publication-figure references, demos, and plotting patterns. |
+| [`Yuan1z0825/nature-skills`](https://github.com/Yuan1z0825/nature-skills) | Ideas from `nature-figure`: R backend, Figure Contract, `figure-contract.md`, `r-backend.md`, and population-genetics figure types. |
+| [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) | Okabe-Ito palette, grayscale checks, journal column-width references, and submission checklist. |
+
+Evaluated but not adopted: large inline plotting snippets from [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization), because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.
+
+## patent-workbench-skill
+
+### Summary
+
+A patent workbench skill for Claude Desktop, Codex, and other agents with file-reading, web-search, and document-writing capabilities. It helps turn project materials, code, design documents, or PPTs into candidate patent points and a structured technical disclosure draft. When a notice, cited references, and original application files are available, it can also help analyze office actions and draft response text.
+
+### What it can help with
+
+- Intake a technical topic, project materials, inventors, assignees, output path, and desensitization requirements.
+- Scan design docs, code, Word files, PPTs, or pasted text.
+- Extract candidate patent points and ask the user to confirm or merge them.
+- Search prior art through CNIPA publication search and Google Patents.
+- Draft a Chinese technical disclosure with background, invention content, technical solution, embodiments, figures, and claim skeleton.
+- Assist with correction notices or office actions by drafting an opinion statement and claim-amendment ideas.
+- Generate Mermaid system and flow diagrams when appropriate.
+- Save `.md` output and attempt `.docx` generation when tools are available.
+- Recognize iteration intent, revise existing drafts, save new timestamped versions, and avoid overwriting older drafts.
+
+> Patent-practice note: this skill helps organize technical materials and draft text. It is not legal advice or patent-agent advice. Any document submitted to CNIPA should be reviewed by the applicant or a qualified patent professional.
+
+### Typical prompts
+
+```text
+Use patent-workbench-skill to mine patent points from this project folder.
+```
+
+```text
+Help me draft a Chinese technical disclosure for this algorithm.
+```
+
+```text
+Help me draft an office-action response based on this notice and the cited references.
+```
+
+```text
+Revise chapter 3 of this existing disclosure and add one embodiment.
+```
+
+```text
+Revise section 3 of the existing disclosure and add one embodiment.
+```
+
+### How it differs from similar patent-writing workflows
+
+| Compared with | Difference |
+| --- | --- |
+| Generic patent-writing prompts | Includes project scanning, patent-point mining, prior-art search, disclosure drafting, self-check, and iteration handling. |
+| Claude Code-only patent workflows | Reworked as a cross-agent workflow for Claude Desktop, Codex, or other agents with file, web-search, and writing tools; Desktop Commander is only an optional Claude Desktop enhancement. |
+| Manual disclosure templates | Helps reason through technical problems, technical effects, prior-art differences, and claim skeletons before drafting. |
+
+### References and lineage
+
+This skill has one clear external source: [`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill). The current version reworks that Claude Code-oriented workflow into a cross-agent patent workbench skill and adds an office-action response drafting mode.
+
+| Original Claude Code version | Desktop-adapted version |
+| --- | --- |
+| `cnipa_epub_search.py` with Playwright | Built-in web search over CNIPA and Google Patents. |
+| Claude Code `Read` / `Write` / `Bash` | Desktop Commander-style file reading, writing, and shell fallback. |
+| Python Office conversion scripts | Word MCP first, local scripts second, Markdown-only as final fallback. |
+| Mermaid rendering through command-line tools | Mermaid code blocks by default, optional `npx mmdc` rendering. |
+| Helper-script iteration logs | Desktop-friendly manual append/update flow. |
+
+No other external skill repository was mixed into this one.
+
+## Installation
+
+### Option 1: Install the whole repository
+
+Clone the repository and copy the skill directories into the skill folder used by your agent runtime.
+
+```bash
+git clone https://github.com/guoyingwei6/scientific-research-skills.git
+```
+
+Then copy one or more skill folders:
+
+```bash
+cp -R scientific-research-skills/literature-mentor ~/.codex/skills/
+cp -R scientific-research-skills/scientific-paper-writing ~/.codex/skills/
+cp -R scientific-research-skills/scientific-figure-making ~/.codex/skills/
+cp -R scientific-research-skills/patent-workbench-skill ~/.codex/skills/
+```
+
+Replace `~/.codex/skills/` with the correct directory for your agent runtime.
+
+Common locations:
+
+| Runtime | Typical skill directory |
+| --- | --- |
+| Codex | `~/.codex/skills/` |
+| Claude Code | `~/.claude/skills/` |
+| Claude Desktop | Project Knowledge or user skill directory, depending on your setup |
+| Gemini | `~/.gemini/skills/` |
+
+Restart the agent after installing new skills.
+
+### Option 2: Install only one skill
+
+If your agent supports installing a GitHub subdirectory, install only the folder you need, for example:
+
+```text
+https://github.com/guoyingwei6/scientific-research-skills/tree/main/scientific-paper-writing
+```
+
+## Ask an agent to install it for you
+
+You can also paste one of these instructions into an agent that has terminal or file access:
+
+```text
+Install the scientific-paper-writing skill from:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Copy the scientific-paper-writing directory into your local skills directory, then verify that the skill is available after restart.
+```
+
+```text
+Install all skills from:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Copy literature-mentor, scientific-paper-writing, scientific-figure-making, and patent-workbench-skill into the current agent's skills directory. Do not copy unrelated files. Verify the installation.
+```
+
+For Claude Desktop, a practical prompt is:
+
+```text
+Use the skill folders from this repository as Project Knowledge:
+https://github.com/guoyingwei6/scientific-research-skills
+
+Install or import only the skill directories I need, and keep their SKILL.md files as the entrypoints.
+```
