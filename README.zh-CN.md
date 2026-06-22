@@ -2,7 +2,7 @@
 
 # Scientific Research Skills
 
-这是一组面向科研工作的 agent skills：深度读文献、写生命科学论文、制作出版级科研图，以及撰写中文专利技术交底书。
+这是一组面向科研工作的 agent skills：深度读文献、写生命科学论文、制作出版级科研图，以及辅助中文专利工作台材料准备。
 
 这些 skills 不是一次性问答 prompt，而是工作流。每个 skill 都定义了任务步骤、质量检查、工具不可用时的降级方式，以及对应科研场景里的判断标准，让 agent 更像一个研究助理，而不是普通聊天机器人。
 
@@ -13,7 +13,7 @@
 | `literature-mentor` | 快速筛选、导师式深读或研究复盘一篇论文 | 阅读模式选择、claim/证据链预检、逐图解释、批判性分析、最小复现、研究启发 |
 | `scientific-paper-writing` | 写作或修改生命科学和组学论文 | 标题、摘要、IMRAD 章节、rebuttal、cover letter、润色、自查 |
 | `scientific-figure-making` | 制作出版级科研图 | 图形设计方案、Python/R 作图代码、可投稿导出的图形规范 |
-| `patent-disclosure-desktop` | 挖掘专利点并撰写中文技术交底书 | 专利点列表、现有技术对比、交底书草稿、修订记录 |
+| `patent-workbench-skill` | 挖掘专利点、撰写技术交底书，并辅助草拟审查意见答复 | 专利点列表、现有技术对比、交底书草稿、OA 答复草稿、修订记录 |
 
 ## literature-mentor
 
@@ -178,11 +178,11 @@
 
 评估但没有采纳：[`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization) 中大量内联代码片段，因为它们占用上下文但没有增加决策结构；Flexoki 配色，因为它更适合 UI/代码审美，不适合作为科学图的色盲安全配色。
 
-## patent-disclosure-desktop
+## patent-workbench-skill
 
 ### 简介
 
-面向 Claude Desktop macOS 的中文专利挖掘和技术交底书 skill。它可以把项目材料、代码、设计文档或 PPT 转成候选专利点，并进一步生成结构化技术交底书草稿。
+专利工作台 Skill，适用于 Claude Desktop、Codex 等具备文件读取、联网检索和文档写入能力的 Agent。它可以把项目材料、代码、设计文档或 PPT 转成候选专利点，进一步生成结构化技术交底书草稿；在已有通知书、对比文件和原申请文件时，也可辅助拆解审查意见并草拟答复文本。
 
 ### 可以帮你做什么
 
@@ -191,14 +191,17 @@
 - 提炼候选专利点，并让用户确认、合并或拆分。
 - 通过 CNIPA 公布公告和 Google Patents 做现有技术检索。
 - 撰写中文技术交底书，包括背景技术、发明内容、技术方案、实施例、附图说明和权利要求雏形。
+- 辅助分析补正通知书或审查意见通知书，草拟意见陈述书和权利要求修改思路。
 - 需要时生成 Mermaid 系统图和流程图。
 - 在工具可用时保存 `.md`，并尝试生成 `.docx`。
 - 识别迭代修改意图，修订已有草稿，保存新时间戳版本，避免覆盖旧稿。
 
+> 专利实务提醒：该 skill 只用于技术材料梳理和文本草拟辅助，不构成法律意见或专利代理意见。正式提交给国知局的文件应由申请人或专利代理师复核。
+
 ### 典型用法
 
 ```text
-使用 patent-disclosure-desktop 从这个项目目录中挖掘专利点。
+使用 patent-workbench-skill 从这个项目目录中挖掘专利点。
 ```
 
 ```text
@@ -209,17 +212,21 @@
 请修改已有交底书的第 3 章，并补充一个实施例。
 ```
 
+```text
+请根据这份审查意见通知书和对比文件，帮我草拟一版意见陈述书。
+```
+
 ### 与类似专利写作流程的区别
 
 | 对比对象 | 区别 |
 | --- | --- |
 | 通用专利写作 prompt | 包含项目扫描、专利点挖掘、查新、交底书撰写、自检和迭代处理。 |
-| 只适用于 Claude Code 的专利流程 | 已适配 Claude Desktop macOS，支持 Desktop Commander 和降级逻辑。 |
+| 只适用于 Claude Code 的专利流程 | 已改成跨 Agent 工作流：Claude Desktop、Codex 或其他具备文件/联网/写入能力的工具均可使用；Desktop Commander 只是 Claude Desktop 的可选增强方式。 |
 | 手工交底书模板 | 在撰写前先分析技术问题、技术效果、现有技术区别和权利要求雏形。 |
 
 ### 参考来源
 
-这个 skill 有一个明确来源：[`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill)。当前版本是把原本面向 Claude Code 的工作流移植到 Claude Desktop macOS。
+这个 skill 有一个明确来源：[`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill)。当前版本把原本面向 Claude Code 的工作流改造成跨 Agent 的专利工作台 Skill，并扩展了审查意见答复辅助草拟模式。
 
 | 原 Claude Code 版本 | 桌面适配版本 |
 | --- | --- |
@@ -247,7 +254,7 @@ git clone https://github.com/guoyingwei6/scientific-research-skills.git
 cp -R scientific-research-skills/literature-mentor ~/.codex/skills/
 cp -R scientific-research-skills/scientific-paper-writing ~/.codex/skills/
 cp -R scientific-research-skills/scientific-figure-making ~/.codex/skills/
-cp -R scientific-research-skills/patent-disclosure-desktop ~/.codex/skills/
+cp -R scientific-research-skills/patent-workbench-skill ~/.codex/skills/
 ```
 
 请把 `~/.codex/skills/` 替换成你所用 agent 的实际目录。
@@ -286,7 +293,7 @@ https://github.com/guoyingwei6/scientific-research-skills
 请从下面这个仓库安装全部 skills：
 https://github.com/guoyingwei6/scientific-research-skills
 
-把 literature-mentor、scientific-paper-writing、scientific-figure-making 和 patent-disclosure-desktop 复制到当前 agent 的 skills 目录。不要复制无关文件。安装完成后请验证这些 skills 是否可用。
+把 literature-mentor、scientific-paper-writing、scientific-figure-making 和 patent-workbench-skill 复制到当前 agent 的 skills 目录。不要复制无关文件。安装完成后请验证这些 skills 是否可用。
 ```
 
 Claude Desktop 可以这样说：

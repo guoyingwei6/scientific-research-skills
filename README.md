@@ -2,7 +2,7 @@
 
 # Scientific Research Skills
 
-Agent skills for scientific research work: reading papers deeply, writing life-sciences manuscripts, making publication-ready figures, and drafting Chinese patent disclosures.
+Agent skills for scientific research work: reading papers deeply, writing life-sciences manuscripts, making publication-ready figures, and preparing Chinese patent workbench materials.
 
 These skills are designed for researchers who want an agent to do more than answer one-off questions. Each skill defines a workflow, quality checks, fallback behavior, and domain-specific judgment so the agent can work like a research assistant rather than a generic chatbot.
 
@@ -13,7 +13,7 @@ These skills are designed for researchers who want an agent to do more than answ
 | `literature-mentor` | Quickly triaging, mentor-reading, or research-reviewing a paper | Reading-mode selection, claim/evidence preflight, figure-by-figure explanation, critique, minimal reproduction, and research ideas |
 | `scientific-paper-writing` | Writing or revising life-sciences and omics manuscripts | Titles, abstracts, IMRAD sections, rebuttals, cover letters, polishing, self-review |
 | `scientific-figure-making` | Producing publication-ready scientific figures | Figure plan, Python/R plotting code, export-ready figure guidance |
-| `patent-disclosure-desktop` | Mining patent points and drafting Chinese technical disclosure documents | Patent-point list, prior-art comparison, disclosure draft, revision record |
+| `patent-workbench-skill` | Mining patent points, drafting technical disclosures, and assisting with office-action responses | Patent-point list, prior-art comparison, disclosure draft, OA response draft, revision record |
 
 ## literature-mentor
 
@@ -180,11 +180,11 @@ The original structure came from [`ChenLiu-1996/figures4papers`](https://github.
 
 Evaluated but not adopted: large inline plotting snippets from [`AcademicForge/scientific-visualization`](https://github.com/AcademicForge/scientific-visualization), because they consumed context without adding decision structure; Flexoki colors, because they are better suited to UI/code aesthetics than scientific color-blind-safe figures.
 
-## patent-disclosure-desktop
+## patent-workbench-skill
 
 ### Summary
 
-A Chinese patent mining and technical disclosure drafting skill adapted for Claude Desktop on macOS. It helps turn project materials, code, design documents, or PPTs into candidate patent points and a structured technical disclosure draft.
+A patent workbench skill for Claude Desktop, Codex, and other agents with file-reading, web-search, and document-writing capabilities. It helps turn project materials, code, design documents, or PPTs into candidate patent points and a structured technical disclosure draft. When a notice, cited references, and original application files are available, it can also help analyze office actions and draft response text.
 
 ### What it can help with
 
@@ -193,18 +193,29 @@ A Chinese patent mining and technical disclosure drafting skill adapted for Clau
 - Extract candidate patent points and ask the user to confirm or merge them.
 - Search prior art through CNIPA publication search and Google Patents.
 - Draft a Chinese technical disclosure with background, invention content, technical solution, embodiments, figures, and claim skeleton.
+- Assist with correction notices or office actions by drafting an opinion statement and claim-amendment ideas.
 - Generate Mermaid system and flow diagrams when appropriate.
 - Save `.md` output and attempt `.docx` generation when tools are available.
 - Recognize iteration intent, revise existing drafts, save new timestamped versions, and avoid overwriting older drafts.
 
+> Patent-practice note: this skill helps organize technical materials and draft text. It is not legal advice or patent-agent advice. Any document submitted to CNIPA should be reviewed by the applicant or a qualified patent professional.
+
 ### Typical prompts
 
 ```text
-Use patent-disclosure-desktop to mine patent points from this project folder.
+Use patent-workbench-skill to mine patent points from this project folder.
 ```
 
 ```text
 Help me draft a Chinese technical disclosure for this algorithm.
+```
+
+```text
+Help me draft an office-action response based on this notice and the cited references.
+```
+
+```text
+Revise chapter 3 of this existing disclosure and add one embodiment.
 ```
 
 ```text
@@ -216,12 +227,12 @@ Revise section 3 of the existing disclosure and add one embodiment.
 | Compared with | Difference |
 | --- | --- |
 | Generic patent-writing prompts | Includes project scanning, patent-point mining, prior-art search, disclosure drafting, self-check, and iteration handling. |
-| Claude Code-only patent workflows | Ported for Claude Desktop macOS with Desktop Commander and fallback behavior. |
+| Claude Code-only patent workflows | Reworked as a cross-agent workflow for Claude Desktop, Codex, or other agents with file, web-search, and writing tools; Desktop Commander is only an optional Claude Desktop enhancement. |
 | Manual disclosure templates | Helps reason through technical problems, technical effects, prior-art differences, and claim skeletons before drafting. |
 
 ### References and lineage
 
-This skill has one clear external source: [`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill). The current version ports that Claude Code-oriented workflow to Claude Desktop macOS.
+This skill has one clear external source: [`handsomestWei/patent-disclosure-skill`](https://github.com/handsomestWei/patent-disclosure-skill). The current version reworks that Claude Code-oriented workflow into a cross-agent patent workbench skill and adds an office-action response drafting mode.
 
 | Original Claude Code version | Desktop-adapted version |
 | --- | --- |
@@ -249,7 +260,7 @@ Then copy one or more skill folders:
 cp -R scientific-research-skills/literature-mentor ~/.codex/skills/
 cp -R scientific-research-skills/scientific-paper-writing ~/.codex/skills/
 cp -R scientific-research-skills/scientific-figure-making ~/.codex/skills/
-cp -R scientific-research-skills/patent-disclosure-desktop ~/.codex/skills/
+cp -R scientific-research-skills/patent-workbench-skill ~/.codex/skills/
 ```
 
 Replace `~/.codex/skills/` with the correct directory for your agent runtime.
@@ -288,7 +299,7 @@ Copy the scientific-paper-writing directory into your local skills directory, th
 Install all skills from:
 https://github.com/guoyingwei6/scientific-research-skills
 
-Copy literature-mentor, scientific-paper-writing, scientific-figure-making, and patent-disclosure-desktop into the current agent's skills directory. Do not copy unrelated files. Verify the installation.
+Copy literature-mentor, scientific-paper-writing, scientific-figure-making, and patent-workbench-skill into the current agent's skills directory. Do not copy unrelated files. Verify the installation.
 ```
 
 For Claude Desktop, a practical prompt is:
