@@ -2,7 +2,7 @@
 name: scientific-paper-writing
 description: 生命科学组学方向（涵盖动植物群体/驯化/适应/选择/渗入/景观基因组学/SV/泛基因组/imputation/多组学整合等子领域）的科研论文写作元技能。基于多个子领域顶刊的写作范式提炼通用规则，覆盖 IMRAD 全流程及 Title/Abstract/Cover letter/Rebuttal 等所有写作任务。当用户提到"写论文"、"写 abstract/introduction/results/discussion/methods"、"改论文"、"润色"、"reviewer 意见"、"rebuttal"、"投稿"、"figure caption"、"研究方向"、"自查"、"翻译"等涉及群体遗传学/基因组学/景观基因组学/驯化适应/选择信号/渗入/imputation panel/系统发育/SV 结构变异/组学整合等场景时触发，以及涉及牛、羊、猪、马、鸡等物种的研究。即使用户只说"帮我看看这段写得怎么样"也应触发。本 skill 优先级高于通用写作 skill。
 created: 2026-06-02 21:45
-updated: 2026-06-02 21:45
+updated: 2026-11-09
 ---
 
 # Life Sciences Omics Paper Writing — Meta Skill
@@ -58,6 +58,8 @@ updated: 2026-06-02 21:45
 ### Step 3 — 元层加载
 
 无论什么任务，**始终加载** `meta/constitution.md`（时态/数字/命名/引用宪法）和 `meta/workflow.md`（写作四步法 / 修改三层法）。
+
+凡是改动用户文字（润色、改写、翻译、写新段落、rebuttal），**同时加载** `meta/evidence_and_scope.md`（编辑范围梯度、保护内容、证据类型、新写前查文献、终稿对照）。
 
 按需加载：
 - 涉及 over-claim 风险（写 Discussion、Abstract 结论句、宣称 causal 关系等）→ `meta/over_claim_guard.md`
@@ -117,6 +119,8 @@ updated: 2026-06-02 21:45
 | "这一节先草草写完，词句以后改" | 写完每段先做 self-review，否则后期返工成本高 |
 | "用户 memory 里有 skill 偏好就直接套用" | memory 是参考，但当前任务的具体上下文优先 |
 | "这是 Methods，套个模板就行" | Methods 是 reproducibility 的根本，每个参数都要核对 |
+| "用户只说润色，我顺手把结构和结论也改了" | 按 `meta/evidence_and_scope.md` 的范围梯度只做授权范围内的修改；科学解读问题单独标出 |
+| "共定位/分类器预测结果写成 demonstrate" | 按证据类型匹配措辞上限：共定位不是中介，预测不是功能验证 |
 | "我在按方向 specific 的范式套这个用户的写作" | 区分两种情况：(a) 借鉴某方向的章节结构、证据链顺序、术语规范 = 正常；(b) 完全照搬某篇论文的句子结构甚至措辞 = 抄袭，停 |
 | "memory 里说用户研究 X 方向，我按 X 方向的标志性段落写" | memory 是参考。先看用户当前初稿/数据，按初稿决定写法；不要没看初稿就按方向标签套 |
 
@@ -138,6 +142,7 @@ scientific-paper-writing/
     ├── meta/                         # 元原则层（6个文件）— 横切所有任务
     │   ├── constitution.md           # 时态/语态/数字/命名/引用宪法（始终加载）
     │   ├── workflow.md               # 写作四步法 + 修改三层法（始终加载）
+    │   ├── evidence_and_scope.md     # 编辑范围、证据类型、终稿对照（改文字时加载）
     │   ├── ai_artifacts.md           # AI 痕迹识别与去除
     │   ├── reviewer_psychology.md    # reviewer 怎么读、3秒决策、雷区清单
     │   ├── over_claim_guard.md       # 保守表达句库
@@ -164,6 +169,8 @@ scientific-paper-writing/
 ---
 
 ## 版本
+
+* v2.2 (2026-11) — 吸收 ZZD academic skill 1.4.0 / humanizer 3.4.3 的编辑范围梯度、证据类型区分、新写前查文献和终稿对照规则，新增 `meta/evidence_and_scope.md`。未引入其个人破折号禁令、资料库和脚本。
 
 * v2.1 (2026-05) — skill 重命名为 `scientific-paper-writing`。内容无变化。
 

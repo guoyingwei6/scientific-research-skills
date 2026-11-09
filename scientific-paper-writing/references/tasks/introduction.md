@@ -141,7 +141,7 @@ updated: 2026-06-02 21:45
 ### 5. 首创性 over-claim
 - 引言里的 "first" / "novel" / "unprecedented" 是 reviewer 第一时间去 PubMed 验证的对象
 - 没 100% 把握 → 加 "to our knowledge"
-- 参考 `over_claim_guard.md`#唯一性
+- 参考 `over_claim_guard.md#唯一性`
 
 ### 6. 时态混乱
 - 通论性事实 → 现在时（"Local adaptation is shaped by ..."）

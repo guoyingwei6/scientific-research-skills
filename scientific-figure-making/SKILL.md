@@ -2,7 +2,7 @@
 name: scientific-figure-making
 description: "Covers publication-ready figures for academic papers, slides, and reports. Python backend (matplotlib/seaborn): bars, trends, scatter, heatmaps, multi-panel layouts with publication house style, print/vector export conventions, and parity with figures4papers demos. R backend (ggplot2, patchwork, ComplexHeatmap): use when the user needs annotated heatmaps, admixture bar plots, or any figure type better served by R. Population-genetics figure types are explicitly in scope: PCA scatter, admixture/STRUCTURE bars, FST heatmap, Manhattan/XP-EHH regional plot, phylogenetic tree with metadata. Always start from the figure contract (core conclusion -> evidence hierarchy -> chart type) before writing code. Do not use for interactive dashboards or web viz (Plotly, Altair, Bokeh), exploratory-only plots without a publication target, or Illustrator/Figma-first infographic workflows."
 created: 2026-05-28 17:27
-updated: 2026-05-28 17:27
+updated: 2026-11-09
 ---
 
 # Scientific figure making
@@ -19,6 +19,7 @@ Before selecting a chart type or writing a single line, fill in the contract men
 4. **Backend** -- Python (matplotlib) or R? See `references/r-backend.md` for the decision rule.
 5. **Statistics** -- What error bars, p-values, or effect sizes must appear?
 6. **Export constraints** -- Journal DPI/format requirements; SVG editable text needed?
+7. **Verification** -- Which real data file feeds each panel, and how will the rendered output be checked? See `references/data-integrity-qa.md`.
 
 > If the user says "draw a PCA" without more context, ask: what comparison is the core message?
 > Colours by population? By admixture proportion? That answer determines layout and palette before any code.
@@ -49,3 +50,4 @@ Before selecting a chart type or writing a single line, fill in the contract men
 | [references/r-backend.md](references/r-backend.md) | R workflow: ComplexHeatmap, ggplot2, patchwork, export |
 | [references/demos.md](references/demos.md) | Canonical figure_* demo links in figures4papers |
 | [references/submission-checklist.md](references/submission-checklist.md) | Pre-submission checklist: universal + pop-gen specific; common pitfalls |
+| [references/data-integrity-qa.md](references/data-integrity-qa.md) | Before plotting code and before delivery: data fidelity, input checks, headless/font hygiene, render-then-verify, editable reconstruction |

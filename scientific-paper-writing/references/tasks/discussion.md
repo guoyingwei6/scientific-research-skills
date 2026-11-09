@@ -127,7 +127,7 @@ reviewer 期待你**有立场**——基于你的数据告诉他你倾向哪一�
 ❌ "This will revolutionize cattle breeding."  
 ✅ "These candidate genes provide targets for marker-assisted selection in [specific breeding context]."
 
-参考 `over_claim_guard.md`#应用前景。
+参考 `over_claim_guard.md#应用前景`。
 
 ### 4. 假性 limitations
 ❌ "A limitation is that we did not include more samples."（每篇都能这么说）  
@@ -156,7 +156,7 @@ reviewer 期待你**有立场**——基于你的数据告诉他你倾向哪一�
 ❌ "Previous studies failed to identify ..."  
 ✅ "Previous studies, limited by [specific constraint], could not address ..."
 
-参考 `over_claim_guard.md`#比较替代。
+参考 `over_claim_guard.md#比较替代`。
 
 ### 9. Conclusion 写成 Abstract
 - Conclusion 段是 Discussion 末段，**不是再总结一遍研究**
